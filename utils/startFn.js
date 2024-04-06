@@ -3,14 +3,15 @@ const firebaseAdmin = require("firebase-admin");
 const app = express();
 
 const serviceAccount = require("../servicekey.json");
-const userRoutes = require("../routes/user");
+// const userRoutes = require("../routes/user");
 const orderRoutes = require("../routes/orders");
 const notFoundMiddleware = require("../middleware/notFound");
 const errorHandlerMiddleware = require("../middleware/errorHandler");
 
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount),
-  databaseURL: "https://mystic-primacy-324905-default-rtdb.firebaseio.com/",
+  databaseURL:
+    "https://farmhelpadvanced-default-rtdb.asia-southeast1.firebasedatabase.app/",
 });
 
 app.use(express.json());
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use("/api/v1/users", userRoutes);
+// app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/orders", orderRoutes);
 
 app.use(notFoundMiddleware);
